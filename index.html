@@ -1,0 +1,187 @@
+/* =============================
+   1) ICON CONTAINER (Big Square)
+   ============================= */
+.icon-container {
+  box-sizing: border-box;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg,
+    rgba(249, 247, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(3px);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* -----------------------------
+   2) TOP & BOTTOM CONTAINERS
+----------------------------- */
+.top-container {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 40px;
+  height: 18px;
+  z-index: 2;
+}
+
+.bottom-container {
+  position: absolute;
+  top: 27px;  /* 5 + 18 + 4 = 27 */
+  left: 5px;
+  width: 40px;
+  height: 18px;
+}
+
+/* -----------------------------
+   3) BIG LIGHT RECTANGLES
+----------------------------- */
+.top-light,
+.bottom-light {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg,
+    rgba(229, 229, 229, 0.7) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  backdrop-filter: blur(3px);
+  border-radius: 4px;
+  opacity: 0.72;
+}
+
+/* -----------------------------
+   4) SMALL DARK RECTANGLES (Dark Overlays)
+----------------------------- */
+.top-dark,
+.bottom-dark {
+  box-sizing: border-box;
+  position: absolute;
+  background: linear-gradient(158.75deg,
+    rgba(229, 229, 229, 0.7) 0%,
+    rgba(255, 255, 255, 0.1) 144%
+  );
+  backdrop-filter: blur(3px);
+  opacity: 0;  /* start invisible */
+  transition: left 0.3s ease 0.38s, width 0.3s ease 0.38s, opacity 0.3s ease 0.38s;
+}
+
+/* Top Dark Overlay Specifics */
+.top-dark {
+  top: 0;
+  left: 40px;
+  width: 5px;
+  height: 100%;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+/* Bottom Dark Overlay Specifics */
+.bottom-dark {
+  top: 0;
+  left: 0;
+  width: 0px;
+  height: 100%;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+/* -----------------------------
+   5) SMALL LIGHT SQUARES (Extra Light Overlays)
+----------------------------- */
+.top-extra-light,
+.bottom-extra-light {
+  box-sizing: border-box;
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg,
+    rgba(229, 229, 229, 0.7) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  backdrop-filter: blur(3px);
+  border-radius: 4px;
+  opacity: 0;
+}
+
+/* Top Extra Light Specifics */
+.top-extra-light {
+  top: 0;
+  left: 0;
+  transition: top 0.3s ease 0s, opacity 0.3s ease 0s;
+}
+
+/* Bottom Extra Light Specifics */
+.bottom-extra-light {
+  top: 0;
+  left: 22px;
+  z-index: 3;
+  transition: top 0.3s ease 0s, opacity 0.3s ease 0s;
+}
+
+/* -----------------------------
+   6) HOVER STATE (Animate Overlays)
+----------------------------- */
+.icon-container:hover .top-dark {
+  transition-delay: 0s;
+  left: 18.5px;
+  width: 40px;
+  opacity: 1;
+}
+
+.icon-container:hover .bottom-dark {
+  transition-delay: 0s;
+  left: 0;
+  width: 22.17px;
+  opacity: 1;
+}
+
+.icon-container:hover .top-extra-light {
+  transition-delay: 0.38s;
+  top: 22px;
+  opacity: 1;
+}
+
+.icon-container:hover .bottom-extra-light {
+  transition-delay: 0.38s;
+  top: -22px;
+  opacity: 1;
+}
+
+/* On unhover, extra overlays revert immediately and dark overlays revert after a delay */
+.icon-container:not(:hover) .top-extra-light {
+  transition-delay: 0s;
+}
+
+.icon-container:not(:hover) .bottom-extra-light {
+  transition-delay: 0s;
+}
+
+.icon-container:not(:hover) .top-dark {
+  transition-delay: 0.38s;
+}
+
+.icon-container:not(:hover) .bottom-dark {
+  transition-delay: 0.38s;
+}
+
+/* -----------------------------
+   7) CLICK (ACTIVE) STATE
+----------------------------- */
+/* When clicked, the icon expands (scales up) and then shrinks back on release */
+.icon-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.icon-link:active .icon-container {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
